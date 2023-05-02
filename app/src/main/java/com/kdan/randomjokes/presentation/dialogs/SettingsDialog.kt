@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.ui.dialogs
+package com.kdan.randomjokes.presentation.dialogs
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.kdan.randomjokes.utility.Utility
+import com.kdan.randomjokes.presentation.utility.Utility
 
 @Composable
 fun SettingsDialog(

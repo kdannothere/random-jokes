@@ -1,6 +1,6 @@
-package com.kdan.randomjokes
+package com.kdan.randomjokes.presentation.adapters
 
-import com.kdan.randomjokes.network.Joke
+import com.kdan.randomjokes.data.Joke
 
 object JokeAdapter {
     fun jokesToText(jokes: List<Joke>): List<String> {

@@ -1,12 +1,7 @@
-package com.kdan.randomjokes
+package com.kdan.randomjokes.presentation.fragments
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,17 +12,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -37,49 +28,16 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kdan.randomjokes.ui.dialogs.SettingsDialog
-import com.kdan.randomjokes.ui.images.LoadingImage
-import com.kdan.randomjokes.ui.images.SettingsImage
-import com.kdan.randomjokes.ui.theme.RandomJokesTheme
+import com.kdan.randomjokes.presentation.images.LoadingImage
+import com.kdan.randomjokes.presentation.images.SettingsImage
 import kotlinx.coroutines.launch
-
-class MainActivity : ComponentActivity() {
-
-    private val viewModel: JokeViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            RandomJokesTheme(darkTheme = viewModel.darkMode.value) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val jokes = viewModel.jokes.collectAsState()
-                    val texts = JokeAdapter.jokesToText(jokes.value)
-                    if (viewModel.showSettingDialog.value) {
-                        SettingsDialog(
-                            darkMode = viewModel.darkMode,
-                            showSettingDialog = viewModel.showSettingDialog
-                        )
-                    }
-                    FragmentJokes(
-                        texts = texts,
-                        showSettingDialog = viewModel.showSettingDialog,
-                        getTenJokes = { viewModel.getTenJokes() },
-                        getOneJoke = { viewModel.getOneJoke() },
-                    )
-                }
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FragmentJokes(
     texts: List<String>,
     showSettingDialog: MutableState<Boolean>,
+    darkMode: MutableState<Boolean>,
     getTenJokes: () -> Unit,
     getOneJoke: () -> Unit,
 ) {
@@ -113,7 +71,8 @@ fun FragmentJokes(
                             }
                             SettingsImage(
                                 modifier.align(Alignment.TopEnd),
-                                showSettingDialog
+                                showSettingDialog,
+                                darkMode
                             )
                         }
                         Button(

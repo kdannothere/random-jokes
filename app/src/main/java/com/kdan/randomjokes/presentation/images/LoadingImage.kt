@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.ui.images
+package com.kdan.randomjokes.presentation.images
 
 import android.os.Build
 import androidx.compose.foundation.Image

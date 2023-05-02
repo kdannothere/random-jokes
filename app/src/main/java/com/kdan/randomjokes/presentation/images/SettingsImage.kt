@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.ui.images
+package com.kdan.randomjokes.presentation.images
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
@@ -16,13 +16,13 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
 import com.kdan.randomjokes.R
-import com.kdan.randomjokes.ui.dialogs.SettingsDialog
-import com.kdan.randomjokes.utility.Utility
+import com.kdan.randomjokes.presentation.utility.Utility
 
 @Composable
 fun SettingsImage(
     modifier: Modifier,
     showSettingDialog: MutableState<Boolean>,
+    darkMode: MutableState<Boolean>,
 ) {
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
@@ -34,15 +34,18 @@ fun SettingsImage(
             }
         }
         .build()
+    val image = if (darkMode.value) {
+        R.drawable.settings_dark
+    } else R.drawable.settings
     Image(
         modifier = modifier
             .size(50.dp)
             .clickable { Utility.turnOnDialog(showSettingDialog) },
         painter = rememberAsyncImagePainter(
-            ImageRequest.Builder(context).data(data = R.drawable.settings).apply(
+            ImageRequest.Builder(context).data(data = image).apply(
                 block = {
-                size(Size.ORIGINAL)
-            }).build(),
+                    size(Size.ORIGINAL)
+                }).build(),
             imageLoader = imageLoader
         ),
         contentDescription = "Image button settings"

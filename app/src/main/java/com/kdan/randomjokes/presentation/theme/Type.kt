@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.ui.theme
+package com.kdan.randomjokes.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

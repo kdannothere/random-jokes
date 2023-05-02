@@ -1,11 +1,11 @@
-package com.kdan.randomjokes
+package com.kdan.randomjokes.presentation.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kdan.randomjokes.network.Joke
-import com.kdan.randomjokes.network.JokeApi
+import com.kdan.randomjokes.data.Joke
+import com.kdan.randomjokes.data.JokeApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

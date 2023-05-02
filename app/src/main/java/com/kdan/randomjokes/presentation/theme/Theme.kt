@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.ui.theme
+package com.kdan.randomjokes.presentation.theme
 
 import android.app.Activity
 import android.os.Build

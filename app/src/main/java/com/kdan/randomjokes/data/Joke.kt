@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.network
+package com.kdan.randomjokes.data
 
 data class Joke(
     val type: String? = null,

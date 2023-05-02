@@ -1,4 +1,4 @@
-package com.kdan.randomjokes.utility
+package com.kdan.randomjokes.presentation.utility
 
 import androidx.compose.runtime.MutableState
 
