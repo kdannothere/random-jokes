@@ -1,5 +1,6 @@
 package com.kdan.randomjokes.presentation.fragments
 
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -112,6 +114,7 @@ fun ShowJoke(
 ) {
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
     Text(
         text = text,
         fontSize = 20.sp,
@@ -124,6 +127,15 @@ fun ShowJoke(
                         duration = SnackbarDuration.Short
                     )
                 }
+            },
+            onLongClick = {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, text)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                context.startActivity(shareIntent)
             }
         )
     )
